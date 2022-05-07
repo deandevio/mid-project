@@ -1,8 +1,16 @@
 import express from "express";
+import { dbConnect } from "./config/db.js";
+import "dotenv/config";
+import router from "./routes/routes.js";
 
 const app = express();
 
+dbConnect();
+
+app.set("view engine", "ejs");
+
 app.use(express.json());
+app.use("/", router);
 
 const PORT = process.env.PORT || 5000;
 
