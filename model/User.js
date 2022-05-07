@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcryptjs from "bcryptjs";
 
 const userSchema = mongoose.Schema({
   username: {
@@ -21,6 +22,24 @@ const userSchema = mongoose.Schema({
   transactions: Number,
   isAdmin: Boolean,
 });
+
+userSchema.pre("save", async function (next) {
+  const salt = await bcryptjs.genSalt();
+  this.password = await bcryptjs.hash(this.password, salt);
+  next();
+});
+
+userSchema.statics.login = async function (username, password) {
+  const user = await User.findOne({ username });
+  if (user) {
+    const auth = await bcryptjs.compare(password, user.password);
+    if (auth) {
+      return user;
+    }
+    throw Error("Bad password");
+  }
+  throw Error("Username does not exist");
+};
 
 const User = mongoose.model("User", userSchema);
 
