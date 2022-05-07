@@ -36,8 +36,8 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.statics.increment = async function (userId) {
-  const transactions = await User.findByIdAndUpdate(userId, { $inc: { transactions: 1 } }, { new: true, upsert: true });
-  return transactions.seq;
+  const updateCount = await User.findByIdAndUpdate(userId, { $inc: { transactions: 1 } }, { new: true, upsert: true });
+  return updateCount.transactions;
 };
 
 userSchema.statics.login = async function (username, password) {
