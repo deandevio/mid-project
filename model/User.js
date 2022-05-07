@@ -19,8 +19,14 @@ const userSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  transactions: Number,
-  isAdmin: Boolean,
+  transactions: {
+    type: Number,
+    default: 0,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {
@@ -28,6 +34,11 @@ userSchema.pre("save", async function (next) {
   this.password = await bcryptjs.hash(this.password, salt);
   next();
 });
+
+userSchema.statics.increment = async function (userId) {
+  const transactions = await User.findByIdAndUpdate(userId, { $inc: { transactions: 1 } }, { new: true, upsert: true });
+  return transactions.seq;
+};
 
 userSchema.statics.login = async function (username, password) {
   const user = await User.findOne({ username });
