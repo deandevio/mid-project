@@ -1,7 +1,7 @@
 import express from "express";
 import { dbConnect } from "./config/db.js";
 import "dotenv/config";
-import router from "./routes/routes.js";
+import router from "./routes/userRoutes.js";
 
 const app = express();
 

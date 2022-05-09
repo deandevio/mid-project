@@ -1,4 +1,4 @@
-import User from "../model/User.js";
+import User from "../model/userModel.js";
 
 export const getHome = (req, res) => {
   res.render("home");

@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
   },
   transactions: {
     type: Number,
-    default: 1,
+    default: 0,
   },
   isAdmin: {
     type: Boolean,
