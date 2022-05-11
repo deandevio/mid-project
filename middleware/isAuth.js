@@ -17,16 +17,16 @@ const verifyToken = (req, res, next) => {
   next();
 };
 
-const createToken = (id) => {
-  return jwt.sign(
-    {
-      user_id: id,
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "2h",
-    }
-  );
-};
+// const createToken = (id) => {
+//   return jwt.sign(
+//     {
+//       user_id: id,
+//     },
+//     process.env.JWT_SECRET,
+//     {
+//       expiresIn: "2h",
+//     }
+//   );
+// };
 
-export { verifyToken, createToken };
+export { verifyToken };

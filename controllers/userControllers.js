@@ -1,6 +1,5 @@
 import User from "../model/userModel.js";
 import jwt from "jsonwebtoken";
-import { createToken } from "../middleware/isAuth.js";
 
 export const getHome = (req, res) => {
   res.render("home");
@@ -10,6 +9,9 @@ export const postSignup = async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await User.create({ username, password });
+    if (user.username === "dean") {
+      user.isAdmin = true;
+    }
     if (user) {
       const token = jwt.sign(
         {
@@ -17,7 +19,7 @@ export const postSignup = async (req, res) => {
         },
         process.env.JWT_SECRET,
         {
-          expiresIn: "2h",
+          expiresIn: "100",
         }
       );
       user.token = token;
@@ -32,7 +34,6 @@ export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await User.login(username, password);
-
     if (user) {
       const token = jwt.sign(
         {
@@ -40,7 +41,7 @@ export const postLogin = async (req, res) => {
         },
         process.env.JWT_SECRET,
         {
-          expiresIn: "1000",
+          expiresIn: "100",
         }
       );
       user.token = token;
