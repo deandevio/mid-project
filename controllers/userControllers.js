@@ -2,9 +2,9 @@ import User from "../model/userModel.js";
 import jwt from "jsonwebtoken";
 import { createToken } from "../middleware/isAuth.js";
 
-export const getHome = (req, res) => {
-  res.render("home");
-};
+export const getHome = (req, res) => res.render("home");
+export const getLogin = (req, res) => res.render("login");
+export const getSignup = (req, res) => res.render("signup");
 
 export const postSignup = async (req, res) => {
   const { username, password } = req.body;
