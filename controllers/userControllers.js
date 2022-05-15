@@ -1,9 +1,9 @@
 import User from "../model/userModel.js";
 import jwt from "jsonwebtoken";
 
-export const getHome = (req, res) => {
-  res.render("home");
-};
+export const getHome = (req, res) => res.render("home");
+export const getLogin = (req, res) => res.render("login");
+export const getSignup = (req, res) => res.render("signup");
 
 export const postSignup = async (req, res) => {
   const { username, password } = req.body;
@@ -22,9 +22,9 @@ export const postSignup = async (req, res) => {
           expiresIn: "100",
         }
       );
-      user.token = token;
+      res.cookie("jwt", token, { maxAge: 900000, httpOnly: true });
+      res.status(201).render("login");
     }
-    res.status(201).json({ success: true, user });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }
