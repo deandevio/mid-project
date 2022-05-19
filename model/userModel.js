@@ -27,8 +27,9 @@ const userSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  token: {
-    type: String,
+  transactions: {
+    type: Number,
+    default: 5,
   },
 });
 
@@ -39,7 +40,7 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.statics.increment = async function (userId) {
-  const updateCount = await User.findByIdAndUpdate(userId, { $inc: { loginTimes: 1 } });
+  const updateCount = await User.findByIdAndUpdate(userId, { $dec: { loginTimes: 1 } });
   return updateCount.transactions;
 };
 

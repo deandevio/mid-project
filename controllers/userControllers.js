@@ -1,5 +1,6 @@
 import User from "../model/userModel.js";
 import jwt from "jsonwebtoken";
+import { errorHandle } from "../middleware/errorHandle.js";
 
 export const getHome = (req, res) => res.render("home");
 export const getLogin = (req, res) => res.render("login");
@@ -28,7 +29,8 @@ export const postSignup = async (req, res) => {
       res.status(201).json({ succuess: true, user: user.username });
     }
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    const errors = errorHandle(error);
+    res.status(400).json({ errors });
   }
 };
 
@@ -50,6 +52,8 @@ export const postLogin = async (req, res) => {
     await User.increment(user._id);
     res.status(200).json({ success: true, user });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    const errors = errorHandle(error);
+    console.log(errors);
+    res.status(400).json({ errors });
   }
 };
