@@ -51,7 +51,12 @@
           });
 
           const data = await result.json();
-          if (data.user) location.assign("/dashboard");
+          if (data.user) {
+            setTimeout(() => {
+              location.assign(`/${data.user.username}`);
+            }, 400);
+          }
+          if (data.errors) console.log(data.errors);
         } catch (error) {
           console.log(error);
         }

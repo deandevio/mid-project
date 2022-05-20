@@ -3,6 +3,11 @@ export const errorHandle = (err) => {
   if (err.code === 11000) {
     errors.username = "This username is already exists";
     errors.password = "";
-    return errors;
   }
+
+  if (err.message.includes("Too many transactions")) {
+    errors = err.message;
+  }
+
+  return errors;
 };

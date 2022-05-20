@@ -50,7 +50,11 @@
         });
 
         const data = await result.json();
-        if (data.user) location.assign("/login");
+        if (data.user) {
+          setTimeout(() => {
+            location.assign("/login");
+          }, 400);
+        }
         if (data.errors) console.log(data.errors);
       });
     </script>

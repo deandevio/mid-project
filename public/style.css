@@ -76,3 +76,13 @@ label {
   display: block;
   margin: 20px 0 10px;
 }
+
+.menu {
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu-button {
+  width: 13em;
+  height: 4em;
+}
