@@ -17,6 +17,7 @@ export const getMenu = async (req, res) => {
     res.redirect("/login");
   } catch (error) {}
 };
+
 export const postSignup = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -47,7 +48,7 @@ export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await User.login(username, password);
-    if (user) {
+    if (user && user.transactions > 0) {
       const token = jwt.sign(
         {
           user_id: user._id,
