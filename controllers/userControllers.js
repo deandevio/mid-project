@@ -5,6 +5,7 @@ import { errorHandle } from "../middleware/errorHandle.js";
 export const getHome = (req, res) => res.render("home");
 export const getLogin = (req, res) => res.render("login");
 export const getSignup = (req, res) => res.render("signup");
+export const getCreateMovie = (req, res) => res.render("createMovie");
 export const getLogout = (req, res) => res.cookie("jwt", false, { maxAge: 1, httpOnly: true }).redirect("login");
 export const getMenu = async (req, res) => {
   const { username } = req.params.username;

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New movie</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">HOME</a>
+        </li>
+        <li>
+          <a href="/logout">LOGOUT</a>
+        </li>
+      </ul>
+    </nav>
+
+    <h1>CREATE NEW MOVIE</h1>
+    <div>
+      <form>
+        <div>
+          <label for="name">Movie name</label>
+          <input type="name" name="name" id="name" required />
+        </div>
+        <div>
+          <label for="name">Select language</label>
+          <select name="language" id="language">
+            <option value="english">English</option>
+            <option value="japanese">Japanese</option>
+            <option value="hebrew">Hebrew</option>
+        </select>
+        </div>
+        <div>
+          <label for="name">Select geners</label>
+        <select name="genres" id="genres">
+            <option value="science-fiction">Science-Fiction</option>
+            <option value="thriller">Thriller</option>
+            <option value="comedy">Comedy</option>
+            <option value="family">Family</option>
+            <option value="fantasy">Fantasy</option>
+        </select>
+        <div>
+        </div>
+            
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script>
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const username = form.username.value;
+        const password = form.password.value;
+        const result = await fetch("/signup", {
+          method: "POST",
+          body: JSON.stringify({ username, password }),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+
+        const data = await result.json();
+        if (data.user) {
+          setTimeout(() => {
+            location.assign("/login");
+          }, 400);
+        }
+        if (data.errors) console.log(data.errors);
+      });
+    </script>
+  </body>
+</html>

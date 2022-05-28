@@ -8,12 +8,12 @@ const movieSchema = new mongoose.Schema({
   },
   language: {
     type: String,
-    enum: ["English", "Japanese"],
+    enum: ["english", "japanese", "hebrew"],
     required: true,
   },
   genres: {
     type: String,
-    enum: ["Drama", "Science-Fiction", "Thriller", "Comedy", "Family", "Fantasy"],
+    enum: ["drama", "science-fiction", "thriller", "comedy", "family", "fantasy"],
   },
 });
 
