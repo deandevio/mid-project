@@ -13,7 +13,7 @@ This mid project is a node.js project from Yaniv Arad's full stack course. You c
 
 ## How to use this app
 
-After doing "npm install" or "yarn install" to install the project dependencies, create a .env file in the root directory
+After doing "npm install" or "yarn install" in order to install the project dependencies, create a .env file in the root directory
 
 The file should have 2 environment virables:
 
