@@ -42,6 +42,7 @@
             <option value="comedy">Comedy</option>
             <option value="family">Family</option>
             <option value="fantasy">Fantasy</option>
+            <option value="action">Action</option>
         </select>
         <div>
         </div>
@@ -54,24 +55,26 @@
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const username = form.username.value;
-        const password = form.password.value;
-        const result = await fetch("/signup", {
+        const name = form.name.value;
+        const language = form.language.value
+        const genres = form.genres.value
+
+        const result = await fetch("/newmovie", {
           method: "POST",
-          body: JSON.stringify({ username, password }),
+          body: JSON.stringify({ name, language, genres }),
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
         });
 
-        const data = await result.json();
-        if (data.user) {
-          setTimeout(() => {
-            location.assign("/login");
-          }, 400);
-        }
-        if (data.errors) console.log(data.errors);
+        // const data = await result.json();
+        // if (data.movie) {
+        //   setTimeout(() => {
+        //     location.assign("/login");
+        //   }, 400);
+        // }
+        // if (data.errors) console.log(data.errors);
       });
     </script>
   </body>

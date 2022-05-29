@@ -5,6 +5,7 @@ const movieSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    lowercase: true,
   },
   language: {
     type: String,
@@ -13,7 +14,9 @@ const movieSchema = new mongoose.Schema({
   },
   genres: {
     type: String,
-    enum: ["drama", "science-fiction", "thriller", "comedy", "family", "fantasy"],
+    enum: ["drama", "science-fiction", "thriller", "comedy", "family", "fantasy", "action"],
+    required: true,
+    lowercase: true,
   },
 });
 

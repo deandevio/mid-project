@@ -22,9 +22,23 @@
     <h1>MENU PAGE</h1>
     <form>
       <div class="menu">
-        <button class="menu-button">Search for movies</button>
-        <button class="menu-button">Create new movie</button>
+        <button id="search" class="menu-button">Search for movies</button>
+        <button id="create" class="menu-button">Create new movie</button>
       </div>
     </form>
+    <script>
+      const searchMovie = document.getElementById("search");
+      const createMovie = document.getElementById("create");
+
+      createMovie.addEventListener("click", (e) => {
+        e.preventDefault();
+        location.assign("/newmovie");
+      });
+
+      searchMovie.addEventListener("click", (e) => {
+        e.preventDefault();
+        location.assign("/newmovie");
+      });
+    </script>
   </body>
 </html>

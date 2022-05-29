@@ -1,4 +1,5 @@
 import User from "../model/userModel.js";
+import Movie from "../model/movieModel.js";
 import jwt from "jsonwebtoken";
 import { errorHandle } from "../middleware/errorHandle.js";
 
@@ -69,5 +70,15 @@ export const postLogin = async (req, res) => {
   } catch (error) {
     const errors = errorHandle(error);
     res.status(400).json({ errors });
+  }
+};
+
+export const postCreateMovie = async (req, res) => {
+  const { name, language, genres } = req.body;
+  try {
+    const movie = await Movie.create({ name, language, genres });
+    res.status(201).json(movie);
+  } catch (error) {
+    console.log(error);
   }
 };
