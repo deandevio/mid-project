@@ -1,7 +1,7 @@
 export const errorHandle = (err) => {
-  let errors = { username: "", password: "" };
+  let errors = { name: "", password: "" };
   if (err.code === 11000) {
-    errors.username = "This username is already exists";
+    errors.name = "This name already exists in the database";
     errors.password = "";
   }
 

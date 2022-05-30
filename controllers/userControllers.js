@@ -77,8 +77,9 @@ export const postCreateMovie = async (req, res) => {
   const { name, language, genres } = req.body;
   try {
     const movie = await Movie.create({ name, language, genres });
-    res.status(201).json(movie);
+    res.status(201).json({ movie });
   } catch (error) {
-    console.log(error);
+    const errors = errorHandle(error);
+    res.status(400).json({ error: errors });
   }
 };
